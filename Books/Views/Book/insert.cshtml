@@ -1,0 +1,114 @@
+﻿<style>
+    .error {
+        color: red;
+    }
+    /* The alert message box */
+    .alert {
+        padding: 20px;
+        background-color: #f44336; /* Red */
+        color: white;
+        margin-bottom: 15px;
+    }
+
+    /* The close button */
+    .closebtn {
+        margin-left: 15px;
+        color: white;
+        font-weight: bold;
+        float: right;
+        font-size: 22px;
+        line-height: 20px;
+        cursor: pointer;
+        transition: 0.3s;
+    }
+
+        /* When moving the mouse over the close button */
+        .closebtn:hover {
+            color: black;
+        }
+</style>
+
+<br />
+<h2 class="text-info">Add / Edit Book</h2>
+<br />
+
+<div class="border container" style="padding:30px;">
+    <div class="alert" id="error">
+        <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+        Error
+        <ul id="errorList"></ul>
+    </div>
+    <form id="form" method="post" enctype="multipart/form-data">
+        <input type="hidden" asp-for="Id" />
+        <div class="text-danger" asp-validation-summary="ModelOnly"></div>
+        <div class="form-group row">
+            <div class="col-3">
+                <label asp-for="Name"></label>
+            </div>
+            <div class="col-6">
+                <input asp-for="Name" class="form-control" required />
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <div class="col-3">
+                <label asp-for="Author"></label>
+            </div>
+            <div class="col-6">
+                <input asp-for="Author" class="form-control" required />
+                <span asp-validation-for="Author" class="text-danger"></span>
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <div class="col-3">
+                <label asp-for="ISBN"></label>
+            </div>
+            <div class="col-6">
+                <input asp-for="ISBN" class="form-control" required />
+                <span asp-validation-for="ISBN" class="text-danger"></span>
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <div class="col-3">
+                <label asp-for="Category"></label>
+            </div>
+            <div class="col-6">
+                <select class="form-control" id="Category" name="BookCategory" required>
+                    <option value="Fiction">Fiction</option>
+                    <option value="Education">Education</option>
+                    <option value="Self Improvement">Self Improvement</option>
+                    <option value="Technology">Technology</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <div class="col-3">
+                <label class="control-label">Cover Image</label>
+            </div>
+            <div class="col-6">
+                <input class="custom-file-input" type="file" id="customFile">
+                <label class="custom-file-label" for="customFile">Choose file</label>
+            </div>
+            <span class="text-danger"></span>
+        </div>
+
+        <div class="form-group row">
+            <div class="col-3 offset-3">
+                <button id="buttonsave" type="button" class="btn btn-primary form-control">
+                    Submit
+                </button>
+            </div>
+            <div class="col-3">
+                <a asp-action="Index" class="btn btn-success form-control">Back To List</a>
+            </div>
+        </div>
+    </form>
+</div>
+
+@section Scripts{
+    <script src="~/js/jquery.validate.js"></script>
+    <script src="~/js/upsert.js"></script>
+}
